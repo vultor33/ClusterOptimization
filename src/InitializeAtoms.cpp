@@ -18,10 +18,10 @@ vector<double> InitializeAtoms::generateCluster(int natm_in, double gamma_in, do
 	natm = natm_in;
 
 //  original
-//	double rSphere = 2.0e0 * Rca *
-//		(0.5e0 + pow((3.0e0 * (double)natm) / pi4sqr2, exp3));
-	double rSphere = Rca *
+	double rSphere = 2.0e0 * Rca *
 		(0.5e0 + pow((3.0e0 * (double)natm) / pi4sqr2, exp3));
+//	double rSphere = Rca *
+//		(0.5e0 + pow((3.0e0 * (double)natm) / pi4sqr2, exp3));
 
 
 

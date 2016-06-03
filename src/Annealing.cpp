@@ -21,6 +21,10 @@ Annealing::~Annealing(){}
 
 void Annealing::basinHoping(vector<double> & x0, RandomNumber * rand_in)
 {
+#ifdef _DEBUG
+	printAllAtoms("clusterBeforeOptimize.xyz", x0);
+#endif
+
 	rand_ = rand_in;
 	finalIteration = 0;
 	double f0 = optimize(x0);

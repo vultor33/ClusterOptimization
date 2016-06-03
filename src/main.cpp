@@ -45,8 +45,8 @@ int main()
 	Annealing anneal_;
 
 	RandomNumber rand_;
-	rand_.setSeed(3);
-	int natm = 5;
+	rand_.setSeed(241);
+	int natm = 8;
 	double gamma = 0.4;
 	double rca = 0.7;
 	InitializeAtoms init_(&rand_);
@@ -60,7 +60,6 @@ int main()
 	anneal_.basinHoping(x_0, &rand_);
 
 	cout << "needed:  " << anneal_.getFinalIteration() << " iterations" << endl;
-
 	cout << "end" << endl;
 	cin.get();
 	return 0;
