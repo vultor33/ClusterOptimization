@@ -15,6 +15,16 @@ void RandomNumber::setSeed(int seed)
 	idum = seed;
 }
 
+double RandomNumber::generateRandomNumber(double fMin, double fMax)
+{
+	return randcpp(fMin, fMax);
+}
+
+int RandomNumber::generateRandomNumber(int fMin, int fMax)
+{
+	return randcpp(fMin, fMax);
+}
+
 double RandomNumber::randcpp(double fMin, double fMax)
 {
 	double f = ((double)rand() / (double)(RAND_MAX));

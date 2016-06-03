@@ -55,8 +55,8 @@ vector<double> GsaStep::makeStep(const vector<double> &x_0)
 	double r, s, DeltaX;
 
 	for (int i = 0; i < size; i++) {
-		r = random_->ran3();
-		s = random_->ran3();
+		r = random_->generateRandomNumber(0.0e0,1.0e0);
+		s = random_->generateRandomNumber(0.0e0, 1.0e0);
 
 		DeltaX = coef * Tup / pow((1.0e0 + qV1 * r * r / pow(T, exp1)), exp2);
 

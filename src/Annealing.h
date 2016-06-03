@@ -13,7 +13,7 @@ public:
 	Annealing();
 	~Annealing();
 
-	void basinHoping(std::vector<double> & x0, int seed = 3);
+	void basinHoping(std::vector<double> & x0, RandomNumber * rand_in);
 
 	int getFinalIteration() { return finalIteration; }
 
@@ -39,7 +39,7 @@ private:
 
 	void printAllAtoms(std::string xyzName, std::vector<double> & x);
 
-	RandomNumber rand_;
+	RandomNumber * rand_;
 
 };
 

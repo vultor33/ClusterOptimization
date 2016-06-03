@@ -42,7 +42,7 @@ bool GsaAcceptance::acceptNewIndividual()
 	{
 		PqA = 1.0e0 /
 			pow((1.0e0 + qA1 * (DeltaE / T)), OneqA1);
-		rand01 = random_->ran3();
+		rand01 = random_->generateRandomNumber(0.0e0,1.0e0);
 		if (rand01 < PqA)
 		{
 			return true;

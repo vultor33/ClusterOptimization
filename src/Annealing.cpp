@@ -5,7 +5,6 @@
 #include <iomanip>
 
 #include "Coordstructs.h"
-#include "AuxMath.h"
 #include "LocalOptimization.h"
 
 using namespace std;
@@ -20,11 +19,10 @@ Annealing::Annealing()
 
 Annealing::~Annealing(){}
 
-void Annealing::basinHoping(vector<double> & x0, int seed)
+void Annealing::basinHoping(vector<double> & x0, RandomNumber * rand_in)
 {
-	rand_.setSeed(seed);
+	rand_ = rand_in;
 	finalIteration = 0;
-	AuxMath auxMath_;
 	double f0 = optimize(x0);
 
 #ifdef _DEBUG
@@ -60,7 +58,7 @@ void Annealing::basinHoping(vector<double> & x0, int seed)
 		{
 			dices++;
 			prob = exp((f0 - f) / temperature);
-			rand = auxMath_.fRand(0, 1.0e0);
+			rand = rand_->generateRandomNumber(0.0e0, 1.0e0);
 			if (prob > rand)
 			{
 				x0 = x;
@@ -109,7 +107,7 @@ double Annealing::optimize(vector<double>& x)
 void Annealing::perturbOperations(vector<double>& x)
 {
 	for (size_t i = 0; i < x.size(); i++)
-		x[i] += rand_.randcpp(-0.5, 0.5);
+		x[i] += rand_->generateRandomNumber(-0.5, 0.5);
 }
 
 void Annealing::saveIndividual(vector<double>& x)

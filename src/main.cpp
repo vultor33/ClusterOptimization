@@ -57,7 +57,7 @@ int main()
 		exit(1);
 	}
 
-	anneal_.basinHoping(x_0);
+	anneal_.basinHoping(x_0, &rand_);
 
 	cout << "needed:  " << anneal_.getFinalIteration() << " iterations" << endl;
 

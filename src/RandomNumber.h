@@ -10,13 +10,17 @@ public:
 
 	void setSeed(int seed);
 
-	double ran3();
+	double generateRandomNumber(double fMin, double fMax);
 
-	double randcpp(double fMin, double fMax);
-
-	int randcpp(int fMin, int fMax);
+	int generateRandomNumber(int fMin, int fMax);
 
 private:
+	double ran3();
+
+	double randcpp(double min, double max);
+
+	int randcpp(int min, int max);
+
 	int idum;
 
 	int iff, mj, mk, inext, inextp;

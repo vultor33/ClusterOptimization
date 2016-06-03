@@ -58,7 +58,7 @@ vector<double> InitializeAtoms::generateCluster(int natm_in, double gamma_in, do
 
 double InitializeAtoms::dRand(double min, double max)
 {
-	return random_->randcpp(min, max);
+	return random_->generateRandomNumber(min, max);
 	/*ran3
 	double random = random_->ran3();
 	return min + (random * (max - min));
