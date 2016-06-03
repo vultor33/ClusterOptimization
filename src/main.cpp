@@ -8,6 +8,7 @@
 #include "Derivative.h"
 #include "Fitness.h"
 #include "RandomNumber.h"
+#include "Annealing.h"
 
 using namespace std;
 
@@ -21,13 +22,19 @@ PROJETO
   para encontrar o minimo global dessas estruturas.
 
 - Qualquer operador adicionado no modelo precisa encontrar o
-  resultado com menos interacoes do que o basin hoping tradicional.
+  resultado com menos interacoes do que o basin hoping tradicional:
+  puro, seco, sem nada.
+
+- Nao adianta eu fazer um teste com qualquer parametro. Tem que ajustar
+  o parametro do teste.
 
 
 
-o basin hoping puro, seco, sem nada.
+IDEIAS
 
-
+- Somar as porcentagens da melhora no final.
+- Alterar um atomo por vez e melhor? - 200
+- Alterar os mais distanetes? - 200
 
 
 */
@@ -35,14 +42,37 @@ o basin hoping puro, seco, sem nada.
 
 int main()
 {
-	//Gsa gsa(1.0001, 1.0001, 1.0001,100,0.4,0.7,5);
+	Annealing anneal_;
 
+	RandomNumber rand_;
+	rand_.setSeed(3);
+	int natm = 5;
+	double gamma = 0.4;
+	double rca = 0.7;
+	InitializeAtoms init_(&rand_);
+	vector<double> x_0 = init_.generateCluster(natm, gamma, rca);
+	if (x_0.size() == 0)
+	{
+		cout << "couldn't generate initial clusters" << endl;
+		exit(1);
+	}
+
+	anneal_.basinHoping(x_0);
+
+	cout << "needed:  " << anneal_.getFinalIteration() << " iterations" << endl;
+
+	cout << "end" << endl;
 	cin.get();
 	return 0;
 }
 
 
 /*
+TESTE GSA
+
+Gsa gsa(1.0001, 1.0001, 1.0001,100,0.4,0.7,5);
+
+
 TESTANDO NUMEROS IMAGINARIOS
 
 RandomNumber random_(-43);

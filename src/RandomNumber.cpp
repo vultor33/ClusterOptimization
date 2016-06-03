@@ -5,17 +5,14 @@
 
 using namespace std;
 
-RandomNumber::RandomNumber(int nRan)
-	:idum(nRan)
-{
-	srand(idum);
-}
+RandomNumber::RandomNumber(){}
 
 RandomNumber::~RandomNumber(){}
 
 void RandomNumber::setSeed(int seed)
 {
 	srand(seed);
+	idum = seed;
 }
 
 double RandomNumber::randcpp(double fMin, double fMax)

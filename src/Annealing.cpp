@@ -10,24 +10,31 @@
 
 using namespace std;
 
-Annealing::Annealing(){}
+Annealing::Annealing()
+{
+	saTemperatureUpdate = 0.0e0;
+	saAcceptance = 0.5e0;
+	saMaxIterations = 1000;
+	saInitialTemperature = 1.6e0;
+}
 
 Annealing::~Annealing(){}
 
-vector<double> Annealing::basinHoping()
+void Annealing::basinHoping(vector<double> & x0, int seed)
 {
+	rand_.setSeed(seed);
 	finalIteration = 0;
 	AuxMath auxMath_;
-	vector<double> x0;
 	double f0 = optimize(x0);
 
 #ifdef _DEBUG
-	printAllAtoms("initialComplexBeforeAnnealing.xyz", x0);
+	printAllAtoms("clusterBeforeAnnealing.xyz", x0);
 	ofstream annealingInfo_("AnnealingInfo.log");
 #endif
 
 	//Variable temperature - always 50/100
-	double temperature = f0 / saInitialTemperature;
+	//double temperature = f0 / saInitialTemperature;
+	double temperature = saInitialTemperature;
 	double fMin = f0;
 	vector<double> xMin = x0;
 	vector<double> x;
@@ -60,7 +67,7 @@ vector<double> Annealing::basinHoping()
 				f0 = f;
 				accep++;
 			}
-			temperature = updateTemperature(temperature);
+			temperature += updateTemperature(temperature);
 		}
 		if (f < fMin)
 		{
@@ -78,11 +85,11 @@ vector<double> Annealing::basinHoping()
 	}
 
 #ifdef _DEBUG
-	printAllAtoms("complexAfterAnnealing.xyz", xMin);
+	printAllAtoms("clusterAfterAnnealing.xyz", xMin);
 	annealingInfo_.close();
 #endif
 
-	return xMin;
+	x0 = xMin;
 }
 
 double Annealing::updateTemperature(double temperature)
@@ -101,6 +108,8 @@ double Annealing::optimize(vector<double>& x)
 
 void Annealing::perturbOperations(vector<double>& x)
 {
+	for (size_t i = 0; i < x.size(); i++)
+		x[i] += rand_.randcpp(-0.5, 0.5);
 }
 
 void Annealing::saveIndividual(vector<double>& x)

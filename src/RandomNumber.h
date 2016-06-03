@@ -4,13 +4,13 @@
 class RandomNumber
 {
 public:
-	RandomNumber(int nRan);
+	RandomNumber();
 
 	~RandomNumber();
 
-	double ran3();
-
 	void setSeed(int seed);
+
+	double ran3();
 
 	double randcpp(double fMin, double fMax);
 

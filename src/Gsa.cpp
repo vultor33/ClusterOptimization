@@ -25,11 +25,12 @@ Gsa::Gsa(
 	)
 {
 	PrintAll printAll_("gbh.log", "gbh-movie.xyz", 1);
-	RandomNumber random_(-75);
+	RandomNumber random_;
+	random_.setSeed(-75);
 	nstopMax = 10000;
 
 	// generation of initial vector
-	InitializeAtoms init_(&random_, &printAll_);
+	InitializeAtoms init_(&random_);
 	vector<double> x_0 = init_.generateCluster(natm, gamma, rca);
 	if (x_0.size() == 0)
 	{

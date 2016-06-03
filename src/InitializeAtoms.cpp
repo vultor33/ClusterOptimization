@@ -4,8 +4,8 @@
 
 using namespace std;
 
-InitializeAtoms::InitializeAtoms(RandomNumber * random_in_, PrintAll * printAll_in_)
-	:random_(random_in_),printAll_(printAll_in_)
+InitializeAtoms::InitializeAtoms(RandomNumber * random_in_)
+	:random_(random_in_)
 {}
 
 InitializeAtoms::~InitializeAtoms(){}
@@ -52,16 +52,17 @@ vector<double> InitializeAtoms::generateCluster(int natm_in, double gamma_in, do
 		}
 	} while (checkSuperposition(x, natm));
 
-	printAll_->printCoordinates(x);
-
 	return x;
 
 }
 
 double InitializeAtoms::dRand(double min, double max)
 {
+	return random_->randcpp(min, max);
+	/*ran3
 	double random = random_->ran3();
 	return min + (random * (max - min));
+	*/
 }
 
 double InitializeAtoms::calcDist(const vector<double> &x, int i, int j)

@@ -5,6 +5,7 @@
 #include <fstream>
 
 #include "Coordstructs.h"
+#include "RandomNumber.h"
 
 class Annealing
 {
@@ -12,7 +13,7 @@ public:
 	Annealing();
 	~Annealing();
 
-	std::vector<double> basinHoping();
+	void basinHoping(std::vector<double> & x0, int seed = 3);
 
 	int getFinalIteration() { return finalIteration; }
 
@@ -37,6 +38,8 @@ private:
 	void saveIndividual(std::vector<double> & x);
 
 	void printAllAtoms(std::string xyzName, std::vector<double> & x);
+
+	RandomNumber rand_;
 
 };
 

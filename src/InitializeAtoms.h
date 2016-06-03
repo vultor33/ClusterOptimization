@@ -10,7 +10,7 @@
 class InitializeAtoms
 {
 public:
-	InitializeAtoms::InitializeAtoms(RandomNumber * random_in_, PrintAll * printAll_in_);
+	InitializeAtoms::InitializeAtoms(RandomNumber * random_in_);
 	InitializeAtoms::~InitializeAtoms();
 
 	std::vector<double> generateCluster(int Natoms, double gamma_in, double Rca_in);
@@ -30,9 +30,6 @@ private:
 	double dRand(double dMin, double dMax);
 
 	RandomNumber * random_;
-	PrintAll * printAll_;
-
-
 
 };
 
