@@ -7,14 +7,35 @@
 #include "Gsa.h"
 #include "Derivative.h"
 #include "Fitness.h"
+#include "RandomNumber.h"
 
 using namespace std;
+
+/*
+PROJETO
+
+- Crio um sistema com 10 clusters e 20 condiçoes inicias pra cada.
+  (5 - 15)
+
+- Avalio quantas interacoes o Basin Hoping puro sem nada demora
+  para encontrar o minimo global dessas estruturas.
+
+- Qualquer operador adicionado no modelo precisa encontrar o
+  resultado com menos interacoes do que o basin hoping tradicional.
+
+
+
+o basin hoping puro, seco, sem nada.
+
+
+
+
+*/
+
 
 int main()
 {
 	//Gsa gsa(1.0001, 1.0001, 1.0001,100,0.4,0.7,5);
-
-
 
 	cin.get();
 	return 0;

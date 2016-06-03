@@ -6,6 +6,7 @@
 
 #include "Coordstructs.h"
 #include "AuxMath.h"
+#include "LocalOptimization.h"
 
 using namespace std;
 
@@ -15,6 +16,7 @@ Annealing::~Annealing(){}
 
 vector<double> Annealing::basinHoping()
 {
+	finalIteration = 0;
 	AuxMath auxMath_;
 	vector<double> x0;
 	double f0 = optimize(x0);
@@ -25,15 +27,16 @@ vector<double> Annealing::basinHoping()
 #endif
 
 	//Variable temperature - always 50/100
-	double cTemp = f0 / saInitialTemperature;
-	int dices = 0;
-	int accep = 0;
-	vector<double> xMin = x0;
+	double temperature = f0 / saInitialTemperature;
 	double fMin = f0;
+	vector<double> xMin = x0;
 	vector<double> x;
 	double f;
 	double prob;
 	double rand;
+	// update temperature data
+	dices = 0;
+	accep = 0;
 
 	for (int i = 0; i < saMaxIterations; i++)
 	{
@@ -49,7 +52,7 @@ vector<double> Annealing::basinHoping()
 		else
 		{
 			dices++;
-			prob = exp((f0 - f) / cTemp);
+			prob = exp((f0 - f) / temperature);
 			rand = auxMath_.fRand(0, 1.0e0);
 			if (prob > rand)
 			{
@@ -57,10 +60,7 @@ vector<double> Annealing::basinHoping()
 				f0 = f;
 				accep++;
 			}
-			if (((double)accep / (double)dices) > saAcceptance)
-				cTemp -= saTemperatureUpdate * cTemp;
-			else
-				cTemp += saTemperatureUpdate * cTemp;
+			temperature = updateTemperature(temperature);
 		}
 		if (f < fMin)
 		{
@@ -73,7 +73,7 @@ vector<double> Annealing::basinHoping()
 		annealingInfo_ << "i:  " << i << "  fMin:  "
 			<< setprecision(16)
 			<< fMin
-			<< "  cTemp:  " << cTemp << endl;
+			<< "  temperature:  " << temperature << endl;
 #endif
 	}
 
@@ -85,9 +85,18 @@ vector<double> Annealing::basinHoping()
 	return xMin;
 }
 
+double Annealing::updateTemperature(double temperature)
+{
+	if (((double)accep / (double)dices) > saAcceptance)
+		return -saTemperatureUpdate * temperature;
+	else
+		return saTemperatureUpdate * temperature;
+}
+
 double Annealing::optimize(vector<double>& x)
 {
-	return 0.0;
+	LocalOptimization local_;	
+	return local_.optimize(x, 0);
 }
 
 void Annealing::perturbOperations(vector<double>& x)

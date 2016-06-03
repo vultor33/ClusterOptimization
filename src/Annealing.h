@@ -14,6 +14,7 @@ public:
 
 	std::vector<double> basinHoping();
 
+	int getFinalIteration() { return finalIteration; }
 
 private:
 	//data
@@ -21,8 +22,13 @@ private:
 	double saInitialTemperature;
 	double saMaxIterations;
 	double saTemperatureUpdate;
-	double finalIteration;
+	int finalIteration;
 	std::vector< std::vector<double> > allIndividuals;
+
+	//temperature variation block
+	int dices;
+	int accep;
+	double updateTemperature(double temperature);
 
 	double optimize(std::vector<double> & x);
 

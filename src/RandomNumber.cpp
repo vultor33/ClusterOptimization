@@ -1,15 +1,33 @@
 #include "RandomNumber.h"
 
 #include <cmath>
+#include <stdlib.h>
 
 using namespace std;
 
 RandomNumber::RandomNumber(int nRan)
 	:idum(nRan)
 {
+	srand(idum);
 }
 
 RandomNumber::~RandomNumber(){}
+
+void RandomNumber::setSeed(int seed)
+{
+	srand(seed);
+}
+
+double RandomNumber::randcpp(double fMin, double fMax)
+{
+	double f = ((double)rand() / (double)(RAND_MAX));
+	return fMin + f * (fMax - fMin);
+}
+
+int RandomNumber::randcpp(int fMin, int fMax)
+{
+	return fMin + (rand() % (int)(fMax - fMin + 1));
+}
 
 double RandomNumber::ran3()
 {
